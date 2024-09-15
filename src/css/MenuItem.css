@@ -1,0 +1,50 @@
+/* src/css/MenuItem.css */
+.menu-item {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.menu-item p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .menu-item {
+    width: 180px;
+    padding: 15px;
+  }
+
+  .menu-item h3 {
+    font-size: 18px;
+  }
+
+  .menu-item p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-item {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .menu-item h3 {
+    font-size: 16px;
+  }
+
+  .menu-item p {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,87 @@
+/* src/css/ImageSlider.css */
+.image-slider {
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.slide {
+  position: relative;
+}
+
+.slide-image {
+  width: 100%;
+  height: 700px; /* Maksimum yüksekliği 700px olarak ayarlandı */
+  object-fit: cover; /* Resimleri kapsayacak şekilde boyutlandırır */
+}
+
+.slide-content {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  transform: translate(-100%, -50%);
+  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+.slick-active .slide-content {
+  transform: translate(21vw, 15%); /* Sol kenardan merkeze kayma */
+  opacity: 1.5;
+}
+
+.slide-content.with-text {
+  top: 50%; /* Yazı olduğunda biraz yukarıda */
+}
+
+.slide-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.slide-content button {
+  border-radius: 20px;
+  border: 1px solid black;
+  background-color: antiquewhite;
+  color: black;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.7s ease;
+}
+
+@media (max-width: 768px) {
+  .image-slider {
+    width: 100%;
+  }
+
+  .slide-image {
+    height: 500px; /* Tabletler için yüksekliği ayarla */
+  }
+
+  .slide-content h2 {
+    font-size: 20px;
+  }
+
+  .slide-content button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide-image {
+    height: 300px; /* Telefonlar için yüksekliği ayarla */
+  }
+
+  .slide-content h2 {
+    font-size: 16px;
+  }
+
+  .slide-content button {
+    font-size: 12px;
+  }
+}

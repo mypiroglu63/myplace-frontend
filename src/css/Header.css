@@ -1,0 +1,74 @@
+/* src/css/Header.css */
+.header {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 10vh; /* Header yüksekliği 10vh olarak ayarlandı */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center; /* İçeriklerin dikey ortalanması */
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-logo {
+  width: 150px; /* Logoyu büyüttük */
+  margin-right: 20px;
+}
+
+.header-nav {
+  display: flex;
+  gap: 30px; /* Linkler arası boşluk */
+}
+
+.header-nav a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-actions a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #333;
+}
+
+.btn.tertiary {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn.orange {
+  background-color: orange;
+  color: #fff;
+}

@@ -1,0 +1,24 @@
+/* src/css/Profile.css */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.profile h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .profile h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile h2 {
+    font-size: 18px;
+  }
+}

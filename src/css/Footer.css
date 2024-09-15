@@ -1,0 +1,21 @@
+/* src/css/Footer.css */
+footer {
+  width: 100%;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  position: static; /* Sabit olmaması için static olarak ayarladık */
+}
+
+@media (max-width: 768px) {
+  footer {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,47 @@
+/* src/css/Menu.css */
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.menu h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.menu-list .menu-item {
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .menu h1 {
+    font-size: 20px;
+  }
+
+  .menu-list .menu-item {
+    margin: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu h1 {
+    font-size: 18px;
+  }
+
+  .menu-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu-list .menu-item {
+    margin: 5px;
+  }
+}

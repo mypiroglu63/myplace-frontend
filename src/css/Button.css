@@ -1,0 +1,57 @@
+/* src/css/Button.css */
+.button {
+  padding: 10px 20px;
+  background-color: #f5f5f5; /* Krem rengi arka plan */
+  color: #333; /* Siyah tonu */
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #333; /* Siyah border */
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 10px; /* Noktanın genişliği */
+  height: 10px; /* Noktanın yüksekliği */
+  background-color: #333; /* Noktanın rengi */
+  border-radius: 50%; /* Noktanın şekli */
+  animation: moveDot 1.5s linear infinite;
+  opacity: 0;
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+@keyframes moveDot {
+  0% {
+    top: -5px;
+    left: -5px;
+  }
+  25% {
+    top: -5px;
+    left: calc(100% - 5px);
+  }
+  50% {
+    top: calc(100% - 5px);
+    left: calc(100% - 5px);
+  }
+  75% {
+    top: calc(100% - 5px);
+    left: -5px;
+  }
+  100% {
+    top: -5px;
+    left: -5px;
+  }
+}
+
+.button:hover {
+  color: #0056b3; /* Hover durumunda yazı rengi */
+  border-color: #0056b3; /* Hover durumunda border rengi */
+}

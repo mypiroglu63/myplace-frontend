@@ -1,0 +1,28 @@
+/* src/css/Gallery.css */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.gallery img {
+  width: 30%;
+  height: auto;
+}
+
+.description {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.description p {
+  font-size: 18px;
+}
+
+.description a {
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+}

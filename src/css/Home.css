@@ -1,0 +1,62 @@
+/* src/css/Home.css */
+.home {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.home h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.register-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.menu-list .menu-item {
+  margin: 10px;
+}
+
+@media (max-width: 768px) {
+  .home h1 {
+    font-size: 20px;
+  }
+
+  .register-button {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home h1 {
+    font-size: 18px;
+  }
+
+  .register-button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .menu-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu-list .menu-item {
+    margin: 5px;
+  }
+}
