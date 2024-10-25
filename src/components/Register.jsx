@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosInstance from "../redux/axiosConfig";
 import { useNavigate } from "react-router-dom";
-import "../css/Register.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -9,70 +8,57 @@ const Register = () => {
     email: "",
     password: "",
   });
-
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:7777/auth/register",
-        formData
-      );
-      if (response.status === 200) {
-        alert("Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz.");
-        navigate("/login");
-      }
+      await axiosInstance.post("/auth/register", formData);
+      navigate("/login"); // Kayıt başarılı olursa login sayfasına yönlendir
     } catch (error) {
-      console.error("Kayıt işlemi sırasında bir hata oluştu:", error);
-      alert("Kayıt başarısız oldu. Lütfen tekrar deneyin.");
+      const errorMessage =
+        error.response?.data?.message ||
+        "Kayıt başarısız oldu. Lütfen tekrar deneyin.";
+      setError(errorMessage);
     }
   };
 
   return (
-    <div className="register-container">
+    <div>
       <h2>Kayıt Ol</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Ad Soyad:
-          <input
-            type="text"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Şifre:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <input
+          type="text"
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          required
+          placeholder="Ad Soyad"
+        />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          placeholder="Şifre"
+        />
         <button type="submit">Kayıt Ol</button>
       </form>
+      {error && <p>{error}</p>}
     </div>
   );
 };

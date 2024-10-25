@@ -1,13 +1,13 @@
-/* src/css/Header.css */
+/* Genel Header Stilleri */
 .header {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 10vh; /* Header yüksekliği 10vh olarak ayarlandı */
+  height: 10vh;
   position: sticky;
   top: 0;
   z-index: 1000;
   display: flex;
-  align-items: center; /* İçeriklerin dikey ortalanması */
+  align-items: center;
 }
 
 .header-container {
@@ -21,13 +21,12 @@
 }
 
 .header-logo {
-  width: 150px; /* Logoyu büyüttük */
-  margin-right: 20px;
+  width: 150px;
 }
 
 .header-nav {
   display: flex;
-  gap: 30px; /* Linkler arası boşluk */
+  gap: 30px;
 }
 
 .header-nav a {
@@ -37,38 +36,63 @@
   font-weight: bold;
 }
 
-.header-actions {
+.header-nav a:hover {
+  color: #007bff;
+}
+
+/* Arama Çubuğu ve Sonuçları */
+.search-container {
   display: flex;
+  gap: 10px;
   align-items: center;
-  gap: 15px;
+  position: relative; /* Arama sonuçları için konum referansı */
 }
 
-.header-actions a {
-  color: #333;
-  text-decoration: none;
+.search-input {
+  padding: 5px 10px;
   font-size: 14px;
+  width: 200px;
 }
 
-.btn {
-  padding: 8px 16px;
+.search-btn {
+  padding: 5px 10px;
+  background-color: #ffc107;
   border: none;
-  border-radius: 20px;
   cursor: pointer;
-  font-size: 14px;
 }
 
-.btn.secondary {
-  background-color: transparent;
-  color: #333;
-  border: 1px solid #333;
+.search-results {
+  position: absolute;
+  top: 110%; /* Arama çubuğunun hemen altında */
+  left: 0;
+  background: #fff;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 5px;
+  z-index: 1000;
 }
 
-.btn.tertiary {
-  background-color: #000;
+.search-result-item {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #f9f9f9;
+}
+
+/* Profil ve Kafe Git Butonları */
+.profile-btn,
+.cafe-btn {
+  background-color: #007bff;
   color: #fff;
-}
-
-.btn.orange {
-  background-color: orange;
-  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
 }

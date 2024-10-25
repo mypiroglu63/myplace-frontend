@@ -1,3 +1,4 @@
+// src/components/ImageSlider.jsx
 import React from "react";
 import Slider from "react-slick";
 import header4 from "../assets/header4.jpg";
@@ -18,16 +19,16 @@ const ImageSlider = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 7000,
+    autoplaySpeed: 5000,
   };
 
   const slides = [
-    { src: header4, text: "", button: false },
+    { src: header4, text: "Hoş Geldiniz", button: true },
     { src: header7, text: "Muhteşem Lezzetler", button: true },
     { src: header8, text: "Ferah Ortam", button: true },
-    { src: header9, text: "", button: true },
-    { src: header10, text: "", button: true },
-    { src: header11, text: "", button: true },
+    { src: header9, text: "Rahat Oturma Alanları", button: true },
+    { src: header10, text: "Sıcak ve Soğuk İçecekler", button: true },
+    { src: header11, text: "Kaliteli Hizmet", button: true },
   ];
 
   return (
