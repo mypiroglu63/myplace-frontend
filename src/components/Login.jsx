@@ -1,3 +1,4 @@
+// src/components/Login.jsx
 import React, { useState } from "react";
 import axiosInstance from "../redux/axiosConfig";
 import { useNavigate } from "react-router-dom";
@@ -25,16 +26,23 @@ const Login = ({ setIsLoggedIn, setUser }) => {
 
       if (response.status === 200) {
         const { user } = response.data;
+        user.isAdmin = user.roles.some(
+          (role) => role.authority === "ROLE_ADMIN"
+        );
+        user.isUser = user.roles.some((role) => role.authority === "ROLE_USER");
 
-        // Kullanıcı verilerini LocalStorage'a kaydet
         localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("userId", user.id); // Oturumu korumak için userId'yi sakla
+        localStorage.setItem("userId", user.id);
 
         setIsLoggedIn(true);
         setUser(user);
 
-        // Profil sayfasına yönlendir
-        navigate(`/profile/${user.id}`);
+        // Rol tabanlı yönlendirme
+        if (user.isAdmin) {
+          navigate("/admin/kafe-profile");
+        } else {
+          navigate(`/profile/${user.id}`);
+        }
       }
     } catch (error) {
       console.error(
