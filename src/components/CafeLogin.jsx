@@ -1,10 +1,10 @@
-// src/components/Login.jsx
 import React, { useState } from "react";
 import axiosInstance from "../redux/axiosConfig";
 import { useNavigate, Link } from "react-router-dom";
 import "../css/Login.css";
 
-const Login = ({ setIsLoggedIn, setUser }) => {
+const CafeLogin = ({ setIsCafeLoggedIn }) => {
+  // setIsCafeLoggedIn prop'u eklendi
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -20,27 +20,24 @@ const Login = ({ setIsLoggedIn, setUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/auth/login", formData);
+      const response = await axiosInstance.post("/api/cafe/login", formData);
 
       if (response.status === 200) {
-        const { user } = response.data;
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("userId", user.id);
-        setIsLoggedIn(true);
-        setUser(user);
-        navigate(`/home/${user.id}`);
+        const { cafe } = response.data;
+        localStorage.setItem("cafe", JSON.stringify(cafe));
+        localStorage.setItem("cafeId", cafe.id);
+        setIsCafeLoggedIn(true); // Oturum durumu güncelleniyor
+        navigate("/home"); // Ana sayfaya yönlendirme
       }
     } catch (error) {
-      setErrorMessage(
-        "Giriş işlemi sırasında bir hata oluştu. Lütfen bilgilerinizi kontrol edin."
-      );
+      setErrorMessage("Cafe girişi sırasında bir hata oluştu.");
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
-        <h2 className="logo">Logo</h2>
+        <h2 className="logo">Mekan Paneli Girişi</h2>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <form onSubmit={handleSubmit}>
           <input
@@ -48,7 +45,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Telefon numarası, kullanıcı adı veya e-posta"
+            placeholder="Cafe E-posta"
             required
             className="login-input"
           />
@@ -65,18 +62,12 @@ const Login = ({ setIsLoggedIn, setUser }) => {
             Giriş Yap
           </button>
         </form>
-        <div className="separator">YA DA</div>
-        <button className="facebook-button">Facebook ile Giriş Yap</button>
-        <p className="forgot-password">Şifreni mi unuttun?</p>
-        <p className="signup">
-          Hesabın yok mu? <span className="signup-link">Kaydol</span>
-        </p>
-        <Link to="/cafe/login" className="mekan-paneli-button">
-          Mekan Paneli
-        </Link>
+        <div className="register-link">
+          <Link to="/cafe/register">Yeni Kafe Oluştur</Link>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default CafeLogin;

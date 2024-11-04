@@ -6,7 +6,7 @@ import axiosInstance from "../redux/axiosConfig";
 const Profile = () => {
   const { userId } = useParams();
   const loggedInUserId = localStorage.getItem("userId");
-  const isOwner = parseInt(loggedInUserId) === parseInt(userId);
+  const isOwner = parseInt(loggedInUserId) === parseInt(userId); // Sadece kendi profilinde düzenleme yapılabilir
 
   const [profile, setProfile] = useState({
     fullName: "",
@@ -37,40 +37,14 @@ const Profile = () => {
     fetchProfile();
   }, [userId]);
 
-  const handleImageUpload = async (e) => {
-    const selectedImage = e.target.files[0];
-    if (!selectedImage) return;
-
-    const formData = new FormData();
-    formData.append("image", selectedImage);
-
+  const handleSave = async () => {
     try {
-      const response = await axiosInstance.post(
-        `/api/user/profile/update/profile-image/${userId}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      setSuccessMessage("Profil resmi başarıyla güncellendi!");
-
-      // Görüntüyü güncelle ve anında göster
-      const newImageUrl = `${response.data.imageUrl}?t=${new Date().getTime()}`;
-      setProfile((prevProfile) => ({
-        ...prevProfile,
-        profileImageUrl: newImageUrl,
-      }));
+      await axiosInstance.post(`/api/user/profile/update/${userId}`, profile);
+      setSuccessMessage("Profil başarıyla güncellendi!");
+      setIsEditing(false);
     } catch (error) {
-      setErrorMessage("Profil resmi güncellenirken hata oluştu.");
+      setErrorMessage("Profil güncellenirken bir hata oluştu.");
     }
-  };
-
-  // Resim seçme işlemini tetikleyen işlev
-  const triggerFileSelect = () => {
-    document.getElementById("fileInput").click();
   };
 
   if (isLoading) {
@@ -83,25 +57,9 @@ const Profile = () => {
       {successMessage && <p className="success">{successMessage}</p>}
       <div className="profile-image">
         <img
-          src={
-            profile.profileImageUrl
-              ? `http://localhost:7777${profile.profileImageUrl}`
-              : "/default-profile.png"
-          }
+          src={profile.profileImageUrl || "/default-profile.png"}
           alt="Profil Resmi"
         />
-        {isOwner && (
-          <>
-            <input
-              type="file"
-              id="fileInput"
-              style={{ display: "none" }}
-              accept="image/*"
-              onChange={handleImageUpload}
-            />
-            <button onClick={triggerFileSelect}>Profil Resmini Güncelle</button>
-          </>
-        )}
       </div>
       <h2>{profile.fullName || "Kullanıcı Adı"}</h2>
       <div className="address-section">
@@ -111,7 +69,7 @@ const Profile = () => {
           type="text"
           value={profile.street || ""}
           onChange={(e) => setProfile({ ...profile, street: e.target.value })}
-          disabled={!isEditing || !isOwner}
+          disabled={!isEditing || !isOwner} // Sadece profil sahibi düzenleyebilir
         />
         <label>Şehir: </label>
         <input
@@ -144,7 +102,7 @@ const Profile = () => {
           disabled={!isEditing || !isOwner}
         />
       </div>
-      {isOwner && (
+      {isOwner && ( // Düzenleme butonları sadece profil sahibi için görünür
         <>
           <button onClick={() => setIsEditing(!isEditing)}>
             {isEditing ? "İptal" : "Profili Düzenle"}

@@ -1,0 +1,109 @@
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: #121212;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease; /* Genişleme geçişi */
+}
+
+.sidebar.expanded {
+  width: 400px; /* Arama için genişletildiğinde yeni genişlik */
+}
+
+.sidebar h2 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+.sidebar ul li a {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sidebar ul li a:hover {
+  color: #fff;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.close-search-btn {
+  background-color: #e63946;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.search-results {
+  margin-top: 20px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
+.search-result-item {
+  padding: 10px 0;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+}
+
+.search-result-item:hover {
+  background-color: #333;
+}
+
+.more-button {
+  margin-top: auto;
+  background-color: #333;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+.logout-button {
+  background-color: #e63946;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.logout-button:hover {
+  background-color: #d62828;
+}

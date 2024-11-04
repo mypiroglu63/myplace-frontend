@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../redux/axiosConfig";
 
-const MenuEditor = () => {
+const MenuEditor = ({ cafeId }) => {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
   const [products, setProducts] = useState([]);
@@ -11,35 +11,32 @@ const MenuEditor = () => {
     category: "",
   });
 
-  useEffect(() => {
-    // Kategorileri yükle
-    const fetchCategories = async () => {
-      const response = await axiosInstance.get("/api/admin/categories/all");
-      setCategories(response.data);
-    };
-    fetchCategories();
-  }, []);
+  const fetchCategories = async () => {
+    const response = await axiosInstance.get(`/api/admin/categories/all`);
+    setCategories(response.data);
+  };
 
   const handleAddCategory = async () => {
     const response = await axiosInstance.post("/api/admin/categories/create", {
       name: newCategory,
+      cafeId: cafeId,
     });
     setCategories([...categories, response.data]);
     setNewCategory("");
   };
 
   const handleAddProduct = async () => {
-    const response = await axiosInstance.post(
-      "/api/admin/products/create",
-      {
-        name: newProduct.name,
-        price: parseFloat(newProduct.price),
-      },
-      { params: { categoryName: newProduct.category } }
-    );
+    const response = await axiosInstance.post("/api/admin/products/create", {
+      ...newProduct,
+      cafeId,
+    });
     setProducts([...products, response.data]);
     setNewProduct({ name: "", price: "", category: "" });
   };
+
+  useEffect(() => {
+    fetchCategories();
+  }, [cafeId]);
 
   return (
     <div>
@@ -81,7 +78,7 @@ const MenuEditor = () => {
         >
           <option value="">Kategori seç</option>
           {categories.map((category) => (
-            <option key={category.name} value={category.name}>
+            <option key={category.id} value={category.name}>
               {category.name}
             </option>
           ))}

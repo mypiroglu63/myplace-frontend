@@ -1,62 +1,60 @@
-/* src/css/Home.css */
-.home {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.home h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.register-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 18px;
-}
-
-.menu-list {
+/* Home.css */
+.home-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  border-left: 1px solid #333; /* Sol çizgi */
+  border-right: 1px solid #333; /* Sağ çizgi */
+  background-color: #000;
+  color: #fff;
 }
 
-.menu-list .menu-item {
-  margin: 10px;
+.suggestions {
+  width: 250px;
+  padding: 20px;
+  background-color: #000;
+  color: #333;
+  position: sticky;
+  top: 0;
+  border-left: 1px solid #333; /* Öneriler kısmında gri çizgi */
 }
 
-@media (max-width: 768px) {
-  .home h1 {
-    font-size: 20px;
-  }
-
-  .register-button {
-    font-size: 16px;
-    padding: 8px 16px;
-  }
+.suggestions h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #fff;
 }
 
-@media (max-width: 480px) {
-  .home h1 {
-    font-size: 18px;
-  }
+.suggestions .user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
 
-  .register-button {
-    font-size: 14px;
-    padding: 6px 12px;
-  }
+.suggestions .user-info .username {
+  font-weight: bold;
+  margin-left: 10px;
+  color: #fff;
+}
 
-  .menu-list {
-    flex-direction: column;
-    align-items: center;
-  }
+.suggestions .recommendations .suggestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-  .menu-list .menu-item {
-    margin: 5px;
-  }
+.suggestions .recommendations .suggestion a {
+  color: #0095f6;
+  text-decoration: none;
+}
+
+.suggestions .recommendations .suggestion a:hover {
+  text-decoration: underline;
+}
+
+/* Border ve kullanıcı adları için küçük ayarlar */
+.suggestions .recommendations {
+  border-top: 1px solid #333;
+  padding-top: 10px;
+  margin-top: 10px;
 }

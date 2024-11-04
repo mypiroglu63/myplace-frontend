@@ -1,58 +1,75 @@
-import React, { useState } from "react";
-import axios from "axios";
-import "../css/AdminCreateTables.css";
+import React, { useState, useEffect } from "react";
+import axiosInstance from "../redux/axiosConfig";
 
-const AdminCreateTables = () => {
-  const [tableCount, setTableCount] = useState(1);
-  const [cafeId, setCafeId] = useState("");
+const AdminCreateTables = ({ cafeId }) => {
+  const [tableCount, setTableCount] = useState("");
+  const [tables, setTables] = useState([]);
 
-  const handleCreateTables = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    fetchTables();
+  }, [cafeId]);
+
+  // Mevcut masaları getir
+  const fetchTables = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:7777/api/tables/admin/createTables",
-        null,
-        {
-          params: {
-            count: tableCount,
-            cafeId: cafeId,
-          },
-        }
-      );
-      if (response.status === 200) {
-        alert("Masalar başarıyla oluşturuldu.");
-      }
+      const response = await axiosInstance.get(`/api/admin/tables/${cafeId}`);
+      setTables(response.data);
     } catch (error) {
-      console.error("Masalar oluşturulurken bir hata oluştu:", error);
-      alert("İşlem başarısız oldu, tekrar deneyin.");
+      console.error("Masalar yüklenirken hata oluştu.", error);
+    }
+  };
+
+  // Yeni masalar oluştur
+  const handleCreateTables = async () => {
+    try {
+      await axiosInstance.post("/api/admin/tables/create", null, {
+        params: { count: tableCount, cafeId },
+      });
+      alert("Masalar başarıyla oluşturuldu!");
+      setTableCount("");
+      fetchTables();
+    } catch (error) {
+      alert("Masa oluşturulurken hata oluştu.");
+      console.error(error);
+    }
+  };
+
+  // Masayı sil
+  const handleDeleteTable = async (tableId) => {
+    try {
+      await axiosInstance.delete(`/api/admin/tables/delete/${tableId}`);
+      alert("Masa başarıyla silindi!");
+      fetchTables();
+    } catch (error) {
+      alert("Masa silinirken hata oluştu.");
+      console.error(error);
     }
   };
 
   return (
-    <div className="admin-create-tables-container">
-      <h2>Masa Oluştur</h2>
-      <form onSubmit={handleCreateTables}>
-        <label>
-          Masa Sayısı:
-          <input
-            type="number"
-            value={tableCount}
-            onChange={(e) => setTableCount(e.target.value)}
-            min="1"
-            required
-          />
-        </label>
-        <label>
-          Kafe ID:
-          <input
-            type="text"
-            value={cafeId}
-            onChange={(e) => setCafeId(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Masaları Oluştur</button>
-      </form>
+    <div>
+      <h2>Masaları Düzenle</h2>
+      <div>
+        <input
+          type="number"
+          placeholder="Masa sayısı"
+          value={tableCount}
+          onChange={(e) => setTableCount(e.target.value)}
+        />
+        <button onClick={handleCreateTables}>Masaları Oluştur</button>
+      </div>
+
+      <h3>Mevcut Masalar</h3>
+      <ul>
+        {tables.map((table) => (
+          <li key={table.id}>
+            <span>
+              Masa No: {table.tableNumber} - Durum: {table.status}
+            </span>
+            <button onClick={() => handleDeleteTable(table.id)}>Sil</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

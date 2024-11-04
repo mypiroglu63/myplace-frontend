@@ -1,38 +1,12 @@
-.admin-create-tables-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-}
-
-.admin-create-tables-container form {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  gap: 15px;
-}
-
-.admin-create-tables-container label {
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-}
-
-.admin-create-tables-container input {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.admin-create-tables-container button {
-  padding: 10px;
+button {
+  padding: 5px 10px;
+  margin: 5px;
+  border: none;
   background-color: #007bff;
   color: white;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
 }
 
-.admin-create-tables-container button:hover {
+button:hover {
   background-color: #0056b3;
 }

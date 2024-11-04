@@ -1,0 +1,84 @@
+.suggestions {
+  width: 300px;
+  padding: 20px;
+  background-color: #121212;
+  color: white;
+  position: sticky;
+  top: 0;
+}
+
+.suggestions .user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.suggestions .profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid #ffdc80;
+}
+
+.suggestions .username {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.suggestions .user-desc {
+  font-size: 12px;
+  color: #a1a1a1;
+}
+
+.suggestions .switch-account {
+  color: #0095f6;
+  font-size: 12px;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.suggestions h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.suggestions .recommendations {
+  margin-top: 15px;
+}
+
+.suggestions .recommendations .suggestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.suggestions .recommendations .suggestion .suggestion-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.suggestions .recommendations .suggestion span {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+}
+
+.suggestions .recommendations .suggestion p {
+  font-size: 12px;
+  color: #a1a1a1;
+}
+
+.suggestions .recommendations .suggestion .follow-btn {
+  color: #0095f6;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.suggestions .recommendations .suggestion .follow-btn:hover {
+  text-decoration: underline;
+}

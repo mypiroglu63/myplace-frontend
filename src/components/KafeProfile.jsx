@@ -1,45 +1,52 @@
-// src/components/KafeProfile.js
-import React, { useState } from "react";
-import MenuEditor from "./MenuEditor";
-import TableEditor from "./TableEditor";
+import React, { useState, useEffect } from "react";
 import CafeInfoEditor from "./CafeInfoEditor";
-import "../css/KafeProfile.css";
+import TableEditor from "./TableEditor";
+import MenuEditor from "./MenuEditor";
+import axiosInstance from "../redux/axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 const KafeProfile = () => {
-  const [activeSection, setActiveSection] = useState("menu");
+  const [cafeInfo, setCafeInfo] = useState(null);
+  const cafeId = localStorage.getItem("cafeId");
+  const navigate = useNavigate();
 
-  const handleSectionChange = (section) => {
-    setActiveSection(section);
-  };
+  useEffect(() => {
+    if (!cafeId) {
+      navigate("/home"); // Kafe girişi yoksa ana sayfaya yönlendir
+      return;
+    }
+
+    const fetchCafeInfo = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/cafe/${cafeId}`);
+
+        if (response.data) {
+          setCafeInfo(response.data);
+        } else {
+          const createResponse = await axiosInstance.post(`/api/cafe/create`, {
+            name: "Yeni Kafe",
+            address: "Adres bilgisi girilmemiş",
+          });
+          setCafeInfo(createResponse.data);
+        }
+      } catch (error) {
+        console.error("Kafe bilgisi yüklenirken hata oluştu:", error);
+      }
+    };
+
+    fetchCafeInfo();
+  }, [cafeId, navigate]);
 
   return (
-    <div className="kafe-profile-container">
+    <div>
       <h1>Kafe Yönetimi</h1>
-      <div className="button-group">
-        <button
-          className={activeSection === "menu" ? "active" : ""}
-          onClick={() => handleSectionChange("menu")}
-        >
-          Menü Düzenle
-        </button>
-        <button
-          className={activeSection === "tables" ? "active" : ""}
-          onClick={() => handleSectionChange("tables")}
-        >
-          Masaları Düzenle
-        </button>
-        <button
-          className={activeSection === "info" ? "active" : ""}
-          onClick={() => handleSectionChange("info")}
-        >
-          Kafe Bilgilerini Güncelle
-        </button>
-      </div>
-      <div className="editor-container">
-        {activeSection === "menu" && <MenuEditor />}
-        {activeSection === "tables" && <TableEditor />}
-        {activeSection === "info" && <CafeInfoEditor />}
-      </div>
+      {cafeInfo && (
+        <>
+          <CafeInfoEditor cafeInfo={cafeInfo} setCafeInfo={setCafeInfo} />
+          <TableEditor cafeId={cafeInfo.id} />
+          <MenuEditor cafeId={cafeInfo.id} />
+        </>
+      )}
     </div>
   );
 };
